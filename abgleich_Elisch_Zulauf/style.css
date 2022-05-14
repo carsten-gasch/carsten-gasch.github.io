@@ -1,0 +1,62 @@
+body {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "elisch start zulauf"
+    "ergebnis ergebnis ergebnis";
+  grid-template-columns: 40vw 19vw 40vw;
+}
+
+header {
+  grid-area: header;
+  text-align: center;
+}
+
+#elisch {
+  grid-area: elisch;
+}
+
+#zulauf {
+  grid-area: zulauf;
+}
+
+#start {
+  display: grid;
+  grid-area: start;
+  justify-items: center;
+}
+
+#ergebnis {
+  grid-area: ergebnis;
+}
+
+textarea {
+  width: 100%;
+  height: 10rem;
+}
+
+::placeholder {
+  font-weight: bolder;
+  font-size: xx-large;
+  text-align: center;
+}
+
+.elisch-true,
+.zulauf-true {
+  background-color: greenyellow;
+  color: greenyellow;
+}
+
+.elisch-false,
+.zulauf-false {
+  background-color: salmon;
+  color: salmon;
+}
+
+table {
+  border: 1px solid black;
+}
+
+td {
+  width: 10rem;
+}
