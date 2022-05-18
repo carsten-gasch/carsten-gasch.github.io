@@ -1,0 +1,26 @@
+html,body
+{
+    height: 100%;
+}
+body
+{
+   display: table;
+   margin: 0 auto;
+}
+
+.container
+{  
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+.cent
+{
+    height: 1em;
+    width: 100%;
+}
+
+td {
+    font-size: 5em;
+    font-weight: bolder;
+}
