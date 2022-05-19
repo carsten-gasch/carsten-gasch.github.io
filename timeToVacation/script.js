@@ -1,38 +1,57 @@
-const content = document.getElementById("content");
-const targetDate = new Date(2022, 4, 30, 0, 0, 1).getTime();
+(function () {
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
 
-let showDots = false;
+  //I'm adding this section so I don't have to keep updating this pen every year :-)
+  //remove this if you don't need it
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, "0");
+  let mm = String(today.getMonth() + 1).padStart(2, "0");
+  let yyyy = today.getFullYear();
+  let nextYear = yyyy + 1;
+  let dayMonth = "05/30/";
+  let targetDate = dayMonth + yyyy;
 
-let myFunc = setInterval(function () {
-  const now = new Date().getTime();
-  const timeLeft = targetDate - now;
-  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
-  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeLeft % (1000 * 60)) / (1000 * 60));
-
-    let result = "";
-
-  if (timeLeft > 0) {
-    result = "<table>";
-    result += "<tr>";
-    result += "<th>d</th><th>h</th><th>m</th><th>s</th>";
-    result += "</tr><tr>";
-    result += `<td>${prettify(days)}</td>`;
-    result += `<td>${prettify(hours)}</td>`;
-    result += `<td>${prettify(minutes)}</td>`;
-    result += `<td>${prettify(seconds)}</td>`;
-    result += "</tr>";
-    result += "</table>";
-  } else {
-    result = "URLAUB";
+  today = mm + "/" + dd + "/" + yyyy;
+  if (today > targetDate) {
+    targetDate = dayMonth + nextYear;
   }
-  content.innerHTML = result;
-}, 1000);
+  //end
 
-function prettify(n) {
-  if (n < 10) return "0" + n;
-  else return "" + n;
+  const countDown = new Date(targetDate).getTime();
+  const x = setInterval(function () {
+    const now = new Date().getTime();
+    const distance = countDown - now;
+
+    document.getElementById("days").innerText = prettify(
+      Math.floor(distance / day)
+    );
+    document.getElementById("hours").innerText = prettify(
+      Math.floor((distance % day) / hour)
+    );
+    document.getElementById("minutes").innerText = prettify(
+      Math.floor((distance % hour) / minute)
+    );
+    document.getElementById("seconds").innerText = prettify(
+      Math.floor((distance % minute) / second)
+    );
+
+    //do something later when date is reached
+    if (distance < 0) {
+      document.getElementById("headline").innerText = "Holidays, baby!";
+      document.getElementById("countdown").style.display = "none";
+      document.getElementById("content").style.display = "block";
+      clearInterval(x);
+    }
+    //seconds
+  }, 0);
+})();
+
+function prettify(number) {
+  let ret = "";
+  if (number < 10) ret = "0" + number;
+  else ret = "" + number;
+  return ret;
 }
