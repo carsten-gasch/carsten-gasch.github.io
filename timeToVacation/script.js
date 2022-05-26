@@ -11,7 +11,7 @@
   let mm = String(today.getMonth() + 1).padStart(2, "0");
   let yyyy = today.getFullYear();
   let nextYear = yyyy + 1;
-  let dayMonth = "05/30/";
+  let dayMonth = "05/28/";
   let targetDate = dayMonth + yyyy;
 
   today = mm + "/" + dd + "/" + yyyy;
